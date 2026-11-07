@@ -1,0 +1,8 @@
+{
+  "_leia": "Cada fonte é UMA página pública de agenda. 'casa' fixa o nome da casa (use o mesmo nome do site Harmonix); com casa null a IA lê o nome da casa em cada evento (calendários com várias casas). O robô só lê páginas permitidas pelo robots.txt do site. Leia também os termos de uso de cada site antes de manter uma fonte aqui.",
+  "fontes": [
+    { "nome": "Visite São Paulo, calendário de eventos", "url": "https://visitesaopaulo.com/calendario-eventos/", "casa": null, "obs": "calendário da cidade com várias casas; confirmar o endereço exato da página" },
+    { "nome": "BaresSP, Audio", "url": "https://www.baressp.com.br/casas-de-show/audio-club", "casa": "Audio", "obs": "lista poucos shows futuros por casa" },
+    { "nome": "BaresSP, Cine Joia", "url": "https://www.baressp.com.br/casas-de-show/cine-joia", "casa": "Cine Joia", "obs": "idem" }
+  ]
+}

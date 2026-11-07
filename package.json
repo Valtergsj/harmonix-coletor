@@ -1,0 +1,8 @@
+{
+  "name": "harmonix-coletor",
+  "private": true,
+  "type": "module",
+  "description": "Robô que lê páginas públicas de agenda e propõe eventos para a planilha do Harmonix (com aprovação humana).",
+  "scripts": { "test": "node coletor/teste.mjs", "coletar": "node coletor/coletar.mjs" },
+  "engines": { "node": ">=20" }
+}
