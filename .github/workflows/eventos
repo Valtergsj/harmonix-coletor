@@ -1,0 +1,45 @@
+name: Coletar eventos
+
+on:
+  schedule:
+    - cron: '0 9 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Modo teste: mostra o que encontrou, sem enviar para a planilha'
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: coletar
+  cancel-in-progress: false
+
+jobs:
+  coletar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Testes do robô
+        run: node coletor/teste.mjs
+      - name: Coletar
+        run: node coletor/coletar.mjs
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          SHEET_WEBHOOK_URL: ${{ secrets.SHEET_WEBHOOK_URL }}
+          SHEET_WEBHOOK_TOKEN: ${{ secrets.SHEET_WEBHOOK_TOKEN }}
+          EVENTS_CSV_URL: ${{ secrets.EVENTS_CSV_URL }}
+          DRY_RUN: ${{ (github.event_name == 'workflow_dispatch' && inputs.dry_run) && '1' || '' }}
+      - name: Guardar o resumo
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: resumo
+          path: saida/
+          if-no-files-found: ignore
